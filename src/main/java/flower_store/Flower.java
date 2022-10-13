@@ -9,6 +9,8 @@ public class Flower {
     private FlowerColor color;
     @Setter @Getter
     private int price;
+    @Getter
+    private FlowerType flowerType;
     public String getColor() {
         return color.toString();
     }
