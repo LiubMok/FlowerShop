@@ -1,6 +1,10 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
 
 jobs:
   build:
@@ -13,11 +17,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Lint Code Base
+        uses:  github/super-linter/slim@v4
+        env:
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JAVA_FILE_NAME: checkstyle.xml
       - name: Test with Maven
         run: mvn --batch-mode --update-snapshots package
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-         VALIDATE_ALL_CODEBASE: false
-         DEFAULT_BRANCH: master
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

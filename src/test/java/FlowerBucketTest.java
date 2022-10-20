@@ -1,30 +1,35 @@
-//package shop;
-
 import flower_store.Flower;
 import flower_store.FlowerBucket;
 import flower_store.FlowerPack;
 import flower_store.FlowerType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions;
+
+import java.util.Random;
 
 public class FlowerBucketTest {
+    private static final Random RANDOM_GENERATOR = new Random();
+    private static final int MAX_QUANTITY = 1000;
+    private static final int MAX_PRICE = 100;
+
     private FlowerBucket flowerBucket;
 
     @BeforeEach
     public void init() {
-        Flower flower = new Flower();
-        FlowerType flowerType = FlowerType.ROSE;
-        flower.setFlowerType(flowerType);
-        flower.setPrice(10);
-        FlowerPack flowerPack = new FlowerPack(flower, 10);
         flowerBucket = new FlowerBucket();
-        flowerBucket.add(flowerPack);
     }
 
     @Test
     public void testPrice() {
-        assertEquals(100, flowerBucket.getPrice());
+        int price = RANDOM_GENERATOR.nextInt(MAX_PRICE);
+        int quantity = RANDOM_GENERATOR.nextInt(MAX_QUANTITY);
+//        Flower flower = new Rose();
+        Flower flower = new Flower();
+        flower.setFlowerType(FlowerType.ROSE);
+        flower.setPrice(price);
+        FlowerPack flowerPack = new FlowerPack(flower, quantity);
+        flowerBucket.add(flowerPack);
+        Assertions.assertEquals(price * quantity, flowerBucket.getPrice());
     }
-
 }
