@@ -3,7 +3,17 @@ package flower_store;
 import java.util.ArrayList;
 
 public class FlowerBucket {
-    private ArrayList<FlowerPack> arr = new ArrayList<FlowerPack>();
+    @Override
+    public String toString() {
+        return "FlowerBucket{" +
+                "arr=" + arr +
+                '}';
+    }
+
+    private ArrayList<FlowerPack> arr = new ArrayList<>();
+    public ArrayList<FlowerPack> getBucket() {
+        return arr;
+    }
     public void add(FlowerPack flowerPack) {
         this.arr.add(flowerPack);
     }
